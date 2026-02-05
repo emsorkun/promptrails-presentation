@@ -77,6 +77,20 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
+.logo-topbar {
+    position: absolute;
+    left: 24px;
+    bottom: 8px;
+    height: 24px;
+    width: auto;
+    opacity: 0.85;
+}
+
+[dir="rtl"] .logo-topbar {
+    left: auto;
+    right: 24px;
+}
+
 .progress-bar {
     height: 3px;
     background: rgba(0, 0, 0, 0.04);
@@ -787,6 +801,17 @@ body {
 @media (max-width: 640px) {
     :root {
         --topbar-height: 40px;
+    }
+
+    .logo-topbar {
+        left: 16px;
+        bottom: 6px;
+        height: 20px;
+    }
+
+    [dir="rtl"] .logo-topbar {
+        left: auto;
+        right: 16px;
     }
 
     .lang-switcher {
