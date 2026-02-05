@@ -86,11 +86,6 @@ body {
     opacity: 0.85;
 }
 
-[dir="rtl"] .logo-topbar {
-    left: auto;
-    right: 24px;
-}
-
 .progress-bar {
     height: 3px;
     background: rgba(0, 0, 0, 0.04);
@@ -218,7 +213,7 @@ body {
     position: absolute;
     top: var(--topbar-height);
     left: 50%;
-    transform: translateX(calc(-50% + 100vw));
+    transform: translateX(-50%);
     width: calc(100% - 48px);
     max-width: 1100px;
     min-height: calc(100vh - var(--topbar-height) - var(--nav-height) - 48px);
@@ -230,7 +225,7 @@ body {
     padding: 40px 48px calc(24px + var(--safe-bottom)) 48px;
     margin: 16px 0 calc(var(--nav-height) + 16px + var(--safe-bottom)) 0;
     opacity: 0;
-    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     contain: layout paint;
 
@@ -247,20 +242,23 @@ body {
     z-index: 1;
 }
 
-[dir="rtl"] .slide {
+/* Slides waiting on the right (for forward navigation) */
+.slide.next {
+    transform: translateX(calc(-50% + 100vw));
+}
+
+/* Slides waiting on the left (for backward navigation) */
+.slide.prev {
     transform: translateX(calc(-50% - 100vw));
 }
 
-[dir="rtl"] .slide.active {
-    transform: translateX(-50%);
+/* RTL: mirror the directions */
+[dir="rtl"] .slide.next {
+    transform: translateX(calc(-50% - 100vw));
 }
 
 [dir="rtl"] .slide.prev {
     transform: translateX(calc(-50% + 100vw));
-}
-
-.slide.prev {
-    transform: translateX(calc(-50% - 100vw));
 }
 
 /* Scrollable slides */
@@ -807,11 +805,6 @@ body {
         left: 16px;
         bottom: 6px;
         height: 20px;
-    }
-
-    [dir="rtl"] .logo-topbar {
-        left: auto;
-        right: 16px;
     }
 
     .lang-switcher {

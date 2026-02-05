@@ -240,9 +240,24 @@ class PresentationController {
     }
 
     init() {
+        // Initialize slide positions: current is active, before are .prev, after are .next
+        this.initSlidePositions();
         this.updateUI();
         this.attachEventListeners();
         document.addEventListener('languagechange', () => this.updateUI());
+    }
+
+    initSlidePositions() {
+        this.slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev', 'next');
+            if (index < this.currentSlide) {
+                slide.classList.add('prev');
+            } else if (index > this.currentSlide) {
+                slide.classList.add('next');
+            } else {
+                slide.classList.add('active');
+            }
+        });
     }
 
     attachEventListeners() {
@@ -301,17 +316,29 @@ class PresentationController {
     }
 
     goToSlide(index) {
-        if (index < 0 || index >= this.totalSlides) return;
+        if (index < 0 || index >= this.totalSlides || index === this.currentSlide) return;
+        
+        const direction = index > this.currentSlide ? 'forward' : 'backward';
         const leavingSlide = this.slides[this.currentSlide];
+        const enteringSlide = this.slides[index];
+        
+        // Remove active from leaving slide
         leavingSlide.classList.remove('active');
-        if (index < this.currentSlide) {
+        
+        // Position the leaving slide based on direction
+        if (direction === 'forward') {
+            // Going forward: leaving slide moves to the left
             leavingSlide.classList.add('prev');
-            setTimeout(() => leavingSlide.classList.remove('prev'), 500);
+        } else {
+            // Going backward: leaving slide moves to the right
+            leavingSlide.classList.add('next');
         }
-        this.currentSlide = index;
-        const enteringSlide = this.slides[this.currentSlide];
-        enteringSlide.classList.remove('prev'); // clear any stuck .prev from earlier bug
+        
+        // Clear positioning classes from entering slide and make it active
+        enteringSlide.classList.remove('prev', 'next');
         enteringSlide.classList.add('active');
+        
+        this.currentSlide = index;
         this.updateUI();
     }
 
