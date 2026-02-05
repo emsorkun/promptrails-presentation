@@ -6,7 +6,11 @@ COPY styles.css /usr/share/nginx/html/
 COPY script.js /usr/share/nginx/html/
 COPY assets/ /usr/share/nginx/html/assets/
 
-# Expose port 80
-EXPOSE 80
+# Copy nginx config template
+COPY nginx.conf /etc/nginx/templates/default.conf.template
 
-# nginx runs automatically as the default command
+# Railway uses dynamic PORT env variable
+ENV PORT=8080
+EXPOSE 8080
+
+# nginx will substitute ${PORT} from environment variable automatically
