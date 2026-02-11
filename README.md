@@ -1,100 +1,61 @@
-# Seafood 2.0 Presentation
+# PromptRails — Onboarding Roadmap
 
-A responsive HTML/CSS presentation for Tutya Fish Market's digital menu optimization strategy.
+A responsive HTML presentation walking new customers through the PromptRails onboarding process (11 steps, from stakeholder mapping to production-scale agents).
 
-## Features
+## Quick Start
 
-- ✨ Pure HTML/CSS/JavaScript - No dependencies
-- 📱 Fully responsive - Works on mobile and desktop
-- ⌨️ Keyboard navigation - Arrow keys, Space, Home, End
-- 👆 Touch gestures - Swipe left/right on mobile
-- 🖱️ Mouse wheel navigation
-- 🎨 Beautiful gradient backgrounds and smooth transitions
-- 📊 Progress bar and slide counter
+Open `index.html` in any modern browser. That's it — no build step, no dependencies.
 
-## How to Use
+## Navigation
 
-### Desktop
-1. Open `index.html` in any modern web browser
-2. Navigate using:
-   - **Arrow Keys** (Left/Right or Up/Down)
-   - **Space Bar** (Next slide)
-   - **Mouse Wheel** (Scroll to navigate)
-   - **Navigation Buttons** (Bottom of screen)
-   - **Home/End Keys** (Jump to first/last slide)
-
-### Mobile
-1. Open `index.html` in any mobile browser
-2. Navigate using:
-   - **Swipe Left** - Next slide
-   - **Swipe Right** - Previous slide
-   - **Navigation Buttons** - Tap the arrows at bottom
+| Input | Action |
+|-------|--------|
+| Arrow keys (← →) | Previous / Next slide |
+| Space | Next slide |
+| Home / End | Jump to first / last slide |
+| Swipe left / right | Next / Previous (touch devices) |
+| Mouse wheel | Navigate slides |
 
 ## File Structure
 
 ```
-tutya-presentation/
-├── index.html          # Main presentation file
-├── styles.css          # All styling and responsive design
-├── script.js           # Navigation and interaction logic
+├── index.html              # Presentation markup (8 slides)
+├── styles.css              # Styling — warm cream theme, responsive
+├── script.js               # Slide controller, keyboard/touch/wheel nav
 ├── assets/
-│   └── growdash-logo.png   # Growdash logo
-└── README.md           # This file
+│   ├── promptrails-logo.png    # PromptRails logo (black)
+│   └── icon.png                # Favicon
+├── Dockerfile              # Docker/nginx config for Railway deploy
+├── nginx.conf              # nginx server template
+└── README.md
 ```
 
-## Slides Overview
+## Slides
 
-1. **Title Slide** - Introduction to Seafood 2.0
-2. **The Digital Seafood Challenge** - Problem definition
-3. **Visual Hierarchy & Anchors** - Icon strategy
-4. **The "Best Seller" Workaround** - Menu optimization
-5. **From Ingredients to Experiences** - Top 5 signature dishes
-6. **Increasing Average Order Value** - Bundles and upselling
-7. **Sandwich Meal Plans (Menus)** - Sandwich + fries + drink strategy
-8. **Limited Time Offer** - Section naming, deadline in description (e.g. Deliveroo), more aggressive discounts
-9. **Recommendation: Hero image refresh** - Crispy Fish Fillet Sandwich (current vs recommended style)
-10. **Trust Signals & Health Tags** - Transparency and health marketing
+1. **Welcome** — Intro and goal statement
+2. **Foundation** — Stakeholder mapping & primary POC
+3. **Scoping** — Deliverables & data landscape
+4. **PromptRails Setup** — LLMs, data sources, agents (5.1–5.3)
+5. **Initial Execution** — First analysis & iteration
+6. **Scale & Mature** — Broader teams & production readiness
+7. **Integrate & Replicate** — Deep integration & more agents
+8. **CTA** — Schedule a kickoff call (links to Calendly)
 
-## Deployment
+## Deploy
 
-### Local
-Simply open `index.html` in your browser.
+### Railway / Docker
 
-### Online
-Upload all files to any web hosting service:
-- GitHub Pages
-- Netlify
-- Vercel
-- AWS S3
-- Or any static hosting provider
+```bash
+docker build -t promptrails-presentation .
+docker run -p 8080:8080 promptrails-presentation
+```
 
-## Browser Compatibility
+The Dockerfile uses `nginx:alpine` and reads the `PORT` env variable automatically (Railway compatible).
 
-- ✅ Chrome/Edge (Latest)
-- ✅ Firefox (Latest)
-- ✅ Safari (Latest)
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+### Static Hosting
 
-## Customization
+Upload all files to any static host (Vercel, Netlify, GitHub Pages, S3, etc.).
 
-### Colors
-Edit the gradient colors in `styles.css`:
-- Main gradient: `background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);`
-- Accent color: `#667eea` (used for buttons and highlights)
+## Browser Support
 
-### Content
-Edit `index.html` to modify slide content. Each slide is a `<section class="slide">` element.
-
-### Logo
-Replace `assets/growdash-logo.png` with your own logo (recommended height: 80px for title slide, 40px for slide headers).
-
-## Tips
-
-- The presentation auto-prevents double-tap zoom on mobile for better UX
-- Scrollable content is indicated on slides with many items (Slide 4)
-- The progress bar at the top shows your position in the presentation
-- The checkmark (✓) appears on the next button when you reach the last slide
-
----
-
-**Created with ❤️ by Growdash**
+Chrome, Firefox, Safari, Edge — latest versions, desktop and mobile.
